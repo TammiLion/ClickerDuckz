@@ -9,7 +9,7 @@ class GameController @Inject constructor() {
 
     val ducks: BehaviorSubject<Int> = BehaviorSubject.createDefault(2)
 
-    val timer = Observable.interval(500, TimeUnit.MILLISECONDS)
+    val timer = Observable.interval(50, TimeUnit.MILLISECONDS)
     private var lastTimeStamp: Long = System.currentTimeMillis()
 
     init {

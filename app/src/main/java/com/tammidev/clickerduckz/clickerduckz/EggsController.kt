@@ -1,10 +1,9 @@
 package com.tammidev.clickerduckz.clickerduckz
 
-import android.util.Log
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-const val EGGS_MILLISECONDS = 4000;
+const val EGGS_MILLISECONDS = 800
 
 class EggsController @Inject constructor(var gameController: GameController) {
     val eggs: BehaviorSubject<Int> = BehaviorSubject.createDefault(1)
@@ -22,7 +21,6 @@ class EggsController @Inject constructor(var gameController: GameController) {
                         eggs.onNext(eggs.value + eggsGenerated)
                     }
                 })
-        eggs.subscribe({ t -> Log.d("Debug", "eggs: " + t) })
     }
 
     fun eggsGenerated(timePassedMilliSeconds: Long): Int {
