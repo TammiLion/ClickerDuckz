@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTextChangeListeners() {
-        model.eggsCountText.observe(this, Observer { text -> eggsLabel.setText(text) })
-        model.ducklingsCountText.observe(this, Observer { text -> ducklingsLabel.setText(text) })
-        model.ducksCountText.observe(this, Observer { text -> ducksLabel.setText(text) })
+        model.eggsCountText.observe(this, Observer { text -> eggsLabel.setText(getString(R.string.eggs_count, text)) })
+        model.ducklingsCountText.observe(this, Observer { text -> ducklingsLabel.setText(getString(R.string.ducklings_count, text)) })
+        model.ducksCountText.observe(this, Observer { text -> ducksLabel.setText(getString(R.string.ducks_count, text)) })
     }
 
     private fun setViewEnabledListeners() {

@@ -12,19 +12,19 @@ class MainViewModel constructor(val eggsController: EggsController) : ViewModel(
 
     inner class EggsCountTextLiveData : LiveData<String>() {
         init {
-            eggsController.eggsObservable.subscribe { value -> postValue("Eggs: " + value.toString()) }
+            eggsController.eggsObservable.subscribe { value -> postValue(value.toString()) }
         }
     }
 
     inner class DucklingsCountTextLiveData : LiveData<String>() {
         init {
-            eggsController.ducklingsObservable.subscribe { value -> postValue("Ducklings: " + value.toString()) }
+            eggsController.ducklingsObservable.subscribe { value -> postValue(value.toString()) }
         }
     }
 
     inner class DucksCountTextLiveData : LiveData<String>() {
         init {
-            eggsController.ducksObservable.subscribe { value -> postValue("Ducks: " + value.toString()) }
+            eggsController.ducksObservable.subscribe { value -> postValue(value.toString()) }
         }
     }
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ClickerDuckz</string>
+    <string name="ducks_count">Ducks: %s</string>
+    <string name="ducklings_count">Ducklings: %s</string>
+    <string name="eggs_count">Eggs: %s</string>
+    <string name="action_hatch">hatch</string>
+
 </resources>
