@@ -11,9 +11,9 @@ class GameController @Inject constructor() {
 
     init {
         timer.timeInterval()
-                .subscribe({ t ->
+                .subscribe { t ->
                     val timePassed: Long = System.currentTimeMillis() - lastTimeStamp
                     lastTimeStamp = System.currentTimeMillis()
-                })
+                }
     }
 }

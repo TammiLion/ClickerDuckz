@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item
+        android:drawable="@drawable/birds1_010"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_001"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_012"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_022"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_047"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_024"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_002"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_048"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/birds1_046"
+        android:duration="200" />
+</animation-list>

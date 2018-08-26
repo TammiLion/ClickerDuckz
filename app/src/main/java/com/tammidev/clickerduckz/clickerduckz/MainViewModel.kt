@@ -2,35 +2,29 @@ package com.tammidev.clickerduckz.clickerduckz
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class MainViewModel constructor(val eggsController: EggsController) : ViewModel() {
 
-    val eggsCountText: EggsCountTextLiveData = EggsCountTextLiveData()
-    val ducklingsCountText: DucklingsCountTextLiveData = DucklingsCountTextLiveData()
-    val ducksCountText: DucksCountTextLiveData = DucksCountTextLiveData()
-    val canClickToHatch: CanClickToHatchLiveData = CanClickToHatchLiveData()
+    val viewState: LiveData<List<ResourceViewState>> = ViewStateLiveData()
 
-    inner class EggsCountTextLiveData : LiveData<String>() {
+    inner class ViewStateLiveData : LiveData<List<ResourceViewState>>() {
         init {
-            eggsController.eggsObservable.subscribe { value -> postValue(value.toString()) }
-        }
-    }
-
-    inner class DucklingsCountTextLiveData : LiveData<String>() {
-        init {
-            eggsController.ducklingsObservable.subscribe { value -> postValue(value.toString()) }
-        }
-    }
-
-    inner class DucksCountTextLiveData : LiveData<String>() {
-        init {
-            eggsController.ducksObservable.subscribe { value -> postValue(value.toString()) }
-        }
-    }
-
-    inner class CanClickToHatchLiveData : LiveData<Boolean>() {
-        init {
-            eggsController.eggsObservable.subscribe { value -> postValue(value > 0) }
+            eggsController.observable.observeOn(Schedulers.newThread()).subscribeOn(AndroidSchedulers.mainThread()).subscribe { value ->
+                value?.let {
+                    postValue(value.map { resource ->
+                        ResourceViewState(resource.name, resource.count.toString(), resource.buttonLabel, R.drawable.egg_animation,
+                                resource.level, resource.produceTime,
+                                !resource.isProducing, resource::onClick)
+                    })
+                }
+            }
         }
     }
 }
+
+data class ResourceViewState(val label: String, val count: String, val buttonLabel: String,
+                             val drawableRes: Int,
+                             val levelProgress: Int, val produceTime: Long,
+                             val enableButton: Boolean, val onClick: () -> Unit)

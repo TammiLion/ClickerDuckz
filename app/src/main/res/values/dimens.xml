@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="xsmallPadding">2dp</dimen>
+    <dimen name="smallPadding">4dp</dimen>
+    <dimen name="regularPadding">8dp</dimen>
+    <dimen name="largePadding">12dp</dimen>
+    <dimen name="xlargePadding">16dp</dimen>
+
+</resources>

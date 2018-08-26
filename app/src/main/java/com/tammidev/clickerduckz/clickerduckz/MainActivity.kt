@@ -4,17 +4,20 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var eggsController: EggsController
-    @Inject lateinit var viewModelFactory: MainViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: MainViewModelFactory
 
-    val model by lazy {
+    private val model by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
+
+    private val adapter = ResourceAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,22 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         (application as CDApplication).getAppComponent().inject(this)
 
-        setViewEnabledListeners()
-        setTextChangeListeners()
-        setBtnInteractors()
-    }
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.setHasStableIds(true)
+        recyclerView.adapter = adapter
 
-    private fun setTextChangeListeners() {
-        model.eggsCountText.observe(this, Observer { text -> eggsLabel.setText(getString(R.string.eggs_count, text)) })
-        model.ducklingsCountText.observe(this, Observer { text -> ducklingsLabel.setText(getString(R.string.ducklings_count, text)) })
-        model.ducksCountText.observe(this, Observer { text -> ducksLabel.setText(getString(R.string.ducks_count, text)) })
-    }
-
-    private fun setViewEnabledListeners() {
-        model.canClickToHatch.observe(this, Observer { canClickToHatch -> hatchBtn.isEnabled = canClickToHatch ?: false })
-    }
-
-    private fun setBtnInteractors() {
-        hatchBtn.setOnClickListener({ v -> eggsController.onHatchBtnClicked() })
+        model.viewState.observe(this, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
     }
 }

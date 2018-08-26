@@ -4,7 +4,7 @@ import android.app.Application
 
 class CDApplication : Application() {
 
-    val component: AppComponent by lazy {
+    private val component: AppComponent by lazy {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
@@ -18,6 +18,6 @@ class CDApplication : Application() {
     }
 
     fun getAppComponent(): AppComponent {
-        return component;
+        return component
     }
 }
